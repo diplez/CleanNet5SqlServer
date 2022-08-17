@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  database:
+    container_name:  Bank.Database
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=#ecuador123
+    tty: true
+    restart: unless-stopped
+    ports:
+      - "1433:1433"
+    privileged: true    
+  bankwebapi:
+    container_name:  Bank.Api
+    build: 
+      context: ./
+      labels: 
+        com.test.descripcion: "BankWebApi"
+        com.test.titulo: "BankWebApi"
+    depends_on:
+      - "database"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=development
+    tty: true
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    privileged: true
