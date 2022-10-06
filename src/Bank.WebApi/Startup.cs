@@ -32,6 +32,11 @@ namespace Store.WebApi
             services.AddControllers();
             services.AddInfrastructure(Configuration);
 
+            services.AddCors(p => p.AddPolicy("corsapp", builder =>
+            {
+                builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+            }));
+            
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             //services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(options =>
@@ -47,6 +52,7 @@ namespace Store.WebApi
             // Configure the HTTP request pipeline.
             if (env.IsDevelopment())
             {
+                app.UseCors("corsapp");
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }

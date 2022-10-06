@@ -23,10 +23,10 @@ Configure the database settings in src\Store.WebApi\appsettings.json
 }
 ```
 
-To create the tables in the database, go to src\Store.WebApi
+To create the tables in the database, go to src\Bank.WebApi
 ```
-dotnet ef migrations add Initial --project Store.Infrastructure --startup-project Store.WebApi
-dotnet ef database update
+dotnet ef migrations add Initial --project src/Bank.Infrastructure --startup-project src/Bank.WebApi
+dotnet ef database update --project src/Bank.Infrastructure --startup-project src/Bank.WebApi
 ```
 
 To run, go to src\Store.WebApi
