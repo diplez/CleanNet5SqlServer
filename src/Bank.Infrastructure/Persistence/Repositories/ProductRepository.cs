@@ -6,6 +6,7 @@ using Store.ApplicationCore.Interfaces;
 using Store.ApplicationCore.Utils;
 using Store.Infrastructure.Persistence.Contexts;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace Store.Infrastructure.Persistence.Repositories
@@ -25,7 +26,7 @@ namespace Store.Infrastructure.Persistence.Repositories
         {
             var product = this.mapper.Map<Product>(request);
             product.Stock = 0;
-            product.CreatedAt = product.UpdatedAt = DateUtil.GetCurrentDate();
+            product.CreatedAt = product.UpdatedAt = DateUtil.GetCurrentDate();            
 
             this.storeContext.Products.Add(product);
             this.storeContext.SaveChanges();
